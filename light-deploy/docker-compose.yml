@@ -8,6 +8,8 @@ services:
   backend:
     image: ${BACKEND_IMAGE}:${BACKEND_TAG}
     restart: unless-stopped
+    environment:
+      - SPRING_PROFILES_ACTIVE=local
     networks:
       - market_network
 
