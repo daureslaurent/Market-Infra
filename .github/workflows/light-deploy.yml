@@ -2,8 +2,8 @@ name: light-deploy.yml
 on:
   repository_dispatch:
     types: [ deploy ]
-  push:
-    branches: [ deploy-bot ]
+#  push:
+#    branches: [ deploy-bot ]
 
 jobs:
   deploy:
@@ -24,8 +24,8 @@ jobs:
             fi
             cd infra
             git fetch origin deploy-bot
-            git checkout deploy-bot
-            git reset --hard origin/deploy-bot
+            git checkout master
+            git reset --hard origin/master
             cd light-deploy
             docker compose --env-file versions.env down
             docker compose --env-file versions.env pull
