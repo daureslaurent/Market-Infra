@@ -20,10 +20,10 @@ jobs:
           script: |
             cd /home/deployuser
             if [ ! -d "infra/.git" ]; then
-              git clone -b deploy-bot https://github.com/daureslaurent/Market-Infra.git infra
+              git clone -b https://github.com/daureslaurent/Market-Infra.git infra
             fi
             cd infra
-            git fetch origin deploy-bot
+            git fetch origin master
             git checkout master
             git reset --hard origin/master
             cd light-deploy
