@@ -1,7 +1,7 @@
 name: build-reverse-proxy
 on:
   push:
-    branches: [ "develop" ]
+    branches: [ master ]
     paths:
       - "reverse-proxy/**"
 
