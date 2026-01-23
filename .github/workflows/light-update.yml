@@ -17,6 +17,20 @@ jobs:
         run: |
           ls -l ./light-deploy
 
+      - name: git rebase deploy-bot
+        run: |
+          git config user.name "infra-bot"
+          git config user.email "infra@bot"
+          git fetch origin
+          
+          if git show-ref --verify --quiet refs/heads/deploy-bot; then
+            git checkout deploy-bot
+          else
+            git checkout -b deploy-bot
+          fi
+          
+          git rebase origin/master
+
       - name: Update versions.env
         run: |          
           if [ "${{ github.event.action }}" = "update-backend" ]; then
@@ -38,6 +52,8 @@ jobs:
         run: |
           git config user.name "infra-bot"
           git config user.email "infra@bot"
+          
           git add light-deploy/versions.env
           git commit -m "🚢 Shipping ${{ github.event.client_payload.image }} (${{ github.event.client_payload.tag }})"
-          git push
+          
+          git push --force-with-lease origin deploy-bot
