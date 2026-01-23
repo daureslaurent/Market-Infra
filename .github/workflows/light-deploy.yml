@@ -18,6 +18,15 @@ jobs:
           username: ${{ secrets.VPS_USER }}
           key: ${{ secrets.VPS_SSH_KEY }}
           script: |
-            cd /opt/infra
-            git pull
-            docker compose up -d
+            cd /home/deployuser
+            if [ ! -d "infra/.git" ]; then
+              git clone -b deploy-bot https://github.com/daureslaurent/Market-Infra.git infra
+            fi
+            cd infra
+            git fetch origin deploy-bot
+            git checkout deploy-bot
+            git reset --hard origin/deploy-bot
+            cd light-deploy
+            docker compose --env-file versions.env down
+            docker compose --env-file versions.env pull
+            docker compose --env-file versions.env up -d
