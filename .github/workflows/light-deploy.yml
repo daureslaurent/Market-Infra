@@ -1,7 +1,7 @@
 name: light-deploy.yml
 on:
   push:
-    branches: [master]
+    branches: [deploy-bot]
 
 jobs:
   deploy:
