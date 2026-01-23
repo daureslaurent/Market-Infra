@@ -28,6 +28,6 @@ jobs:
             git clean -fd
             git pull
             cd light-deploy
-            docker compose --env-file versions.env down
-            docker compose --env-file versions.env pull
-            docker compose --env-file versions.env up -d
+            docker compose --env-file versions.env --env-file /home/deployuser/local.env down
+            docker compose --env-file versions.env --env-file /home/deployuser/local.env pull
+            docker compose --env-file versions.env --env-file /home/deployuser/local.env up -d

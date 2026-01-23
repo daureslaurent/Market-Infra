@@ -18,9 +18,15 @@ services:
     restart: unless-stopped
     networks:
       - market_network
-    ports:
-      - "2541:80"
+      - ${GATEWAY_NETWORK}
+  labels:
+    - "traefik.enable=true"
+    - "traefik.http.routers.market.rule=Host(`${GATEWAY_DOMAIN}`)"
+    - "traefik.http.routers.market.entrypoints=web,websecure"
+    - "traefik.http.routers.market.tls.certresolver=myresolver"
 
 networks:
   market_network:
     driver: bridge
+  ${GATEWAY_NETWORK}:
+    external: true
