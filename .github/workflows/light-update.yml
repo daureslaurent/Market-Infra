@@ -13,18 +13,18 @@ jobs:
       - name: Update versions.env
         run: |
           if [ "${{ github.event.action }}" = "update-backend" ]; then
-            sed -i "s#^BACKEND_IMAGE=.*#BACKEND_IMAGE=${{ github.event.client_payload.image }}#" light-deploy/versions.env
-            sed -i "s#^BACKEND_TAG=.*#BACKEND_TAG=${{ github.event.client_payload.tag }}#" light-deploy/versions.env
+            sed -i "s#^BACKEND_IMAGE=.*#BACKEND_IMAGE=${{ github.event.client_payload.image }}#" ./light-deploy/versions.env
+            sed -i "s#^BACKEND_TAG=.*#BACKEND_TAG=${{ github.event.client_payload.tag }}#" ./light-deploy/versions.env
           fi
 
           if [ "${{ github.event.action }}" = "update-frontend" ]; then
-            sed -i "s#^FRONTEND_IMAGE=.*#FRONTEND_IMAGE=${{ github.event.client_payload.image }}#" light-deploy/versions.env
-            sed -i "s#^FRONTEND_TAG=.*#FRONTEND_TAG=${{ github.event.client_payload.tag }}#" light-deploy/versions.env
+            sed -i "s#^FRONTEND_IMAGE=.*#FRONTEND_IMAGE=${{ github.event.client_payload.image }}#" ./light-deploy/versions.env
+            sed -i "s#^FRONTEND_TAG=.*#FRONTEND_TAG=${{ github.event.client_payload.tag }}#" ./light-deploy/versions.env
           fi
 
           if [ "${{ github.event.action }}" = "update-reverse" ]; then
-            sed -i "s#^REVERSE_PROXY_IMAGE=.*#REVERSE_PROXY_IMAGE=${{ github.event.client_payload.image }}#" light-deploy/versions.env
-            sed -i "s#^REVERSE_PROXY_TAG=.*#REVERSE_PROXY_TAG=${{ github.event.client_payload.tag }}#" light-deploy/versions.env
+            sed -i "s#^REVERSE_PROXY_IMAGE=.*#REVERSE_PROXY_IMAGE=${{ github.event.client_payload.image }}#" ./light-deploy/versions.env
+            sed -i "s#^REVERSE_PROXY_TAG=.*#REVERSE_PROXY_TAG=${{ github.event.client_payload.tag }}#" ./light-deploy/versions.env
           fi
 
       - name: Commit changes
