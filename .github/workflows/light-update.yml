@@ -3,6 +3,9 @@ on:
   repository_dispatch:
     types: [update-backend, update-frontend, update-reverse]
 
+permissions:
+  contents: write
+
 jobs:
   update:
     runs-on: ubuntu-latest
