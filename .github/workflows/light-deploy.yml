@@ -1,7 +1,9 @@
 name: light-deploy.yml
 on:
+  repository_dispatch:
+    types: [ deploy ]
   push:
-    branches: [deploy-bot]
+    branches: [ deploy-bot ]
 
 jobs:
   deploy:

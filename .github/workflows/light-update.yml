@@ -57,3 +57,13 @@ jobs:
           git commit -m "🚢 Shipping ${{ github.event.client_payload.image }} (${{ github.event.client_payload.tag }})"
           
           git push --force-with-lease origin deploy-bot
+
+      - name: Trigger deploy-bot
+        run: |
+          curl -X POST \
+            -H "Authorization: Bearer ${{ secrets.INFRA_TOKEN }}" \
+            -H "Accept: application/vnd.github+json" \
+            https://api.github.com/repos/daureslaurent/Market-Infra/dispatches \
+            -d '{
+              "event_type": "deploy"
+            }'
