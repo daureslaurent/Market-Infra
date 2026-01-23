@@ -13,6 +13,14 @@ services:
     networks:
       - market_network
 
+  reverse-proxy:
+    image: ${REVERSE_PROXY_IMAGE}:${REVERSE_PROXY_TAG}
+    restart: unless-stopped
+    networks:
+      - market_network
+    ports:
+      - "80:2541"
+
 networks:
   market_network:
     driver: bridge
