@@ -1,4 +1,4 @@
-name: light-deploy.yml
+name: light-update.yml
 on:
   repository_dispatch:
     types: [update-backend, update-frontend, update-reverse]
