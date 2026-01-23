@@ -10,8 +10,12 @@ jobs:
     steps:
       - uses: actions/checkout@v4
 
-      - name: Update versions.env
+      - name: check folder
         run: |
+          ls -l ./
+
+      - name: Update versions.env
+        run: |          
           if [ "${{ github.event.action }}" = "update-backend" ]; then
             sed -i "s#^BACKEND_IMAGE=.*#BACKEND_IMAGE=${{ github.event.client_payload.image }}#" ./light-deploy/versions.env
             sed -i "s#^BACKEND_TAG=.*#BACKEND_TAG=${{ github.event.client_payload.tag }}#" ./light-deploy/versions.env
