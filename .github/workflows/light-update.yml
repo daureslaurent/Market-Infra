@@ -12,7 +12,7 @@ jobs:
 
       - name: check folder
         run: |
-          ls -l ./
+          ls -l ./light-deploy
 
       - name: Update versions.env
         run: |          
