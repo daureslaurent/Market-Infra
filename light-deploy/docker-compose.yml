@@ -1,0 +1,16 @@
+services:
+  frontend:
+    image: ${FRONTEND_IMAGE}:${FRONTEND_TAG}
+    restart: unless-stopped
+    networks:
+      - market_network
+
+  backend:
+    image: ${BACKEND_IMAGE}:${BACKEND_TAG}
+    restart: unless-stopped
+    networks:
+      - market_network
+
+networks:
+  market_network:
+    driver: bridge
