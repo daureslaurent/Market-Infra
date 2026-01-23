@@ -23,9 +23,9 @@ jobs:
               git clone -b https://github.com/daureslaurent/Market-Infra.git infra
             fi
             cd infra
-            git fetch origin master
-            git checkout master
-            git reset --hard origin/master
+            git fetch --all
+            git reset --hard origin/main
+            git clean -fd
             cd light-deploy
             docker compose --env-file versions.env down
             docker compose --env-file versions.env pull
