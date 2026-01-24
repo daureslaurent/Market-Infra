@@ -34,8 +34,8 @@ jobs:
           dockerfile: ./reverse-proxy/Dockerfile
           context: ./reverse-proxy
           image_tag: ${{ env.SHORT_SHA }}
-          image_name: ${{ github.repository }}  # it will be lowercased internally
-          github_token: ${{ secrets.INFRA_TOKEN }}
+          image_name: ${{ github.repository }}
+          github_token: ${{ secrets.GITHUB_TOKEN }}
 
       - name: Trigger infra update
         run: |
