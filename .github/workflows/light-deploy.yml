@@ -31,7 +31,7 @@ jobs:
             fi
             cd infra
             git fetch --all
-            git reset --hard origin/main
+            git reset --hard origin/master
             git clean -fd
             git pull
             cd light-deploy
