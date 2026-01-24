@@ -62,7 +62,7 @@ jobs:
             -d '{
               "event_type": "update-reverse",
               "client_payload": {
-                "image": "'"${{ github.repository }}"'",
+                "image": "'ghcr.io/"${{ github.repository }}"'",
                 "tag": "'"${{ env.SHORT_SHA }}"'"
               }
             }'
