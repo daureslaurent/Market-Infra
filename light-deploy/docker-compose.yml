@@ -18,7 +18,7 @@ services:
     restart: unless-stopped
     networks:
       - market_network
-      - ${GATEWAY_NETWORK}
+      - gateway_traefik_gate
     labels:
       - "traefik.enable=true"
       - "traefik.http.routers.market.rule=Host(`${GATEWAY_DOMAIN}`)"
@@ -28,5 +28,5 @@ services:
 networks:
   market_network:
     driver: bridge
-  ${GATEWAY_NETWORK}:
+  gateway_traefik_gate:
     external: true
