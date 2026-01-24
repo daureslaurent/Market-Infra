@@ -18,6 +18,13 @@ jobs:
           username: ${{ secrets.VPS_USER }}
           key: ${{ secrets.VPS_SSH_KEY }}
           script: |
+            set -e
+
+            echo "🔐 Logging into GHCR"
+            echo "${{ secrets.GITHUB_TOKEN }}" | docker login ghcr.io \
+            -u "${{ github.repository_owner }}" \
+            --password-stdin
+            
             cd /home/deployuser
             if [ ! -d "infra/.git" ]; then
               git clone -b https://github.com/daureslaurent/Market-Infra.git infra
