@@ -9,9 +9,31 @@ services:
     image: ${BACKEND_IMAGE}:${BACKEND_TAG}
     restart: unless-stopped
     environment:
-      - SPRING_PROFILES_ACTIVE=local
+      - SPRING_PROFILES_ACTIVE=postgres
+      - POSTGRES_USER: ${POSTGRES_USER}
+      - POSTGRES_PASSWORD: ${POSTGRES_PASSWORD}
     networks:
       - market_network
+      - db
+
+  postgres:
+    container_name: postgres
+    image: postgres
+    environment:
+      POSTGRES_USER: ${POSTGRES_USER}
+      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD}
+      PGDATA: /data/postgres
+      POSTGRES_DB: market
+    volumes:
+      - db:/data/postgres
+    networks:
+      - db
+    restart: unless-stopped
+    healthcheck:
+      test: [ "CMD-SHELL", "pg_isready -d postgres" ]
+      interval: 30s
+      timeout: 10s
+      retries: 5
 
   reverse-proxy:
     image: ${REVERSE_PROXY_IMAGE}:${REVERSE_PROXY_TAG}
@@ -28,5 +50,10 @@ services:
 networks:
   market_network:
     driver: bridge
+  db:
+    driver: bridge
   gateway_traefik_gate:
     external: true
+
+volumes:
+  db:
