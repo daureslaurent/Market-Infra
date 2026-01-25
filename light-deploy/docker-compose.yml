@@ -8,6 +8,8 @@ services:
   backend:
     image: ${BACKEND_IMAGE}:${BACKEND_TAG}
     restart: unless-stopped
+    depends_on:
+      - postgres
     environment:
       - SPRING_PROFILES_ACTIVE=postgres
       - POSTGRES_USER=${POSTGRES_USER}
