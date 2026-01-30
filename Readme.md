@@ -38,12 +38,12 @@ It is responsible for deploying the complete application stack using **Docker Co
 
 ## 📦 Services Overview
 
-| Service      | Description                                           | Repository     |
-|--------------|-------------------------------------------------------|---------------|
-| API Gateway  | Routes requests, handles auth and load balancing     | 🔗 *link here* |
-| Order MS     | Manages orders, payments, and order status          | 🔗 *link here* |
-| Catalog MS   | Manages products, categories, pricing, stock       | 🔗 *link here* |
-| Customer MS  | Manages customer profiles and notifications         | 🔗 *link here* |
-| Frontend     | UI for browsing, orders, and account management     | 🔗 *https://github.com/daureslaurent/Market-Angular* |
+| Service       | Description                                      | Repository     |
+|---------------|--------------------------------------------------|---------------|
+| BackForFront  | Aggregates microservices for the frontend        | 🔗 *link here* |
+| Order MS      | Manages orders, payments, and order status       | 🔗 *link here* |
+| Catalog MS    | Manages products, categories, pricing, stock     | 🔗 *link here* |
+| Customer MS   | Manages customer profiles and notifications      | 🔗 *link here* |
+| Frontend      | UI for browsing, orders, and account management  | 🔗 *https://github.com/daureslaurent/Market-Angular* |
 
 > Replace the links above with the corresponding repositories.
