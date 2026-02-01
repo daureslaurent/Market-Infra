@@ -1,0 +1,28 @@
+name: Deploy on K8S using Helm
+on:
+  repository_dispatch:
+    types: [ deploy ]
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Install Helm
+        run: |
+          curl https://raw.githubusercontent.com/helm/helm/main/scripts/get-helm-3 | bash
+
+      - name: Deploy Helm chart
+        env:
+          KUBE_CONTEXT: ${{ secrets.KUBE_CONTEXT }}
+          NAMESPACE_APP: ${{ github.event.helm_namespace }}
+          HELM_REPO_URL: https://helm.lda-dev.com
+          HELM_REPO_USERNAME: ${{ secrets.HELM_REPO_USERNAME }}
+          HELM_REPO_PASSWORD: ${{ secrets.HELM_REPO_PASSWORD }}
+          NAME_APP: ${{ github.event.helm_name }}
+        run: |
+          helm repo add repo-lda-dev "$HELM_REPO_URL" --username "$HELM_REPO_USERNAME" --password "$HELM_REPO_PASSWORD"
+          helm repo update
+          helm uninstall "$NAME_APP" --namespace "$NAMESPACE_APP" --kube-context "$KUBE_CONTEXT" || true
+          helm install "$NAME_APP" "repo-lda-dev/$NAME_APP" --namespace "$NAMESPACE_APP" --kube-context "$KUBE_CONTEXT"

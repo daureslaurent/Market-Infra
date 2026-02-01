@@ -1,0 +1,76 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: {{ include "template-holder.fullname" . }}
+  labels:
+    {{- include "template-holder.labels" . | nindent 4 }}
+spec:
+  {{- if not .Values.autoscaling.enabled }}
+  replicas: {{ .Values.replicaCount }}
+  {{- end }}
+  selector:
+    matchLabels:
+      {{- include "template-holder.selectorLabels" . | nindent 6 }}
+  template:
+    metadata:
+      {{- with .Values.podAnnotations }}
+      annotations:
+        {{- toYaml . | nindent 8 }}
+      {{- end }}
+      labels:
+        {{- include "template-holder.selectorLabels" . | nindent 8 }}
+    spec:
+      {{- with .Values.imagePullSecrets }}
+      imagePullSecrets:
+        {{- toYaml . | nindent 8 }}
+      {{- end }}
+      serviceAccountName: {{ include "template-holder.serviceAccountName" . }}
+      securityContext:
+        {{- toYaml .Values.podSecurityContext | nindent 8 }}
+      containers:
+        - name: {{ .Chart.Name }}
+          securityContext:
+            {{- toYaml .Values.securityContext | nindent 12 }}
+          image: "{{ .Values.image.repository }}:{{ .Values.image.tag | default .Chart.AppVersion }}"
+          imagePullPolicy: {{ .Values.image.pullPolicy }}
+          ports:
+            - containerPort: {{ .Values.service.portContainer }}
+              name: web
+              protocol: TCP
+            {{- if .Values.grpc.enabled }}
+            - containerPort: {{ .Values.grpc.port }}
+              name: grpc
+              protocol: TCP
+            {{- end }}
+            {{- if .Values.metricCustom.enabled }}
+            - containerPort: {{ .Values.metricCustom.port }}
+              name: {{ .Values.metricCustom.name }}
+              protocol: TCP
+            {{- end }}
+          livenessProbe:
+            httpGet:
+              path: "{{ .Values.image.probeContext }}/health/liveness"
+              port: web
+            initialDelaySeconds: 5
+            timeoutSeconds: 3
+            failureThreshold: 10
+          readinessProbe:
+            httpGet:
+              path: "{{ .Values.image.probeContext }}/health/readiness"
+              port: web
+            initialDelaySeconds: 5
+            timeoutSeconds: 3
+          resources:
+            {{- toYaml .Values.resources | nindent 12 }}
+      {{- with .Values.nodeSelector }}
+      nodeSelector:
+        {{- toYaml . | nindent 8 }}
+      {{- end }}
+      {{- with .Values.affinity }}
+      affinity:
+        {{- toYaml . | nindent 8 }}
+      {{- end }}
+      {{- with .Values.tolerations }}
+      tolerations:
+        {{- toYaml . | nindent 8 }}
+      {{- end }}

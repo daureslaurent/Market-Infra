@@ -1,0 +1,16 @@
+apiVersion: monitoring.coreos.com/v1
+kind: ServiceMonitor
+metadata:
+  name: {{ include "template-holder.fullname" . }}
+  labels:
+    {{- include "template-holder.labels" . | nindent 4 }}
+spec:
+  {{- if not .Values.autoscaling.enabled }}
+  replicas: {{ .Values.replicaCount }}
+  {{- end }}
+  selector:
+    matchLabels:
+      {{- include "template-holder.selectorLabels" . | nindent 6 }}
+  endpoints:
+    - port: {{ if .Values.metricCustom.enabled }}{{ .Values.metricCustom.name }}{{ else }}web{{ end }}
+      path: "{{ .Values.image.probeContext }}/prometheus"
