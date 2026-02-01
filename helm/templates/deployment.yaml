@@ -33,10 +33,10 @@ spec:
             {{- toYaml .Values.securityContext | nindent 12 }}
           image: "{{ .Values.image.repository }}:{{ .Values.image.tag | default .Chart.AppVersion }}"
           imagePullPolicy: {{ .Values.image.pullPolicy }}
-          { { - with .Values.envFrom } }
+          {{- with .Values.envFrom }}
           envFrom:
-            { { - toYaml . | nindent 12 } }
-          { { - end } }
+            {{- toYaml . | nindent 12 }}
+          {{- end }}
           ports:
             - containerPort: {{ .Values.service.portContainer }}
               name: web
