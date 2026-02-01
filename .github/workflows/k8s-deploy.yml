@@ -37,29 +37,11 @@ jobs:
       - name: Deploy Helm chart
         env:
           KUBE_CONTEXT: ${{ secrets.KUBE_CONTEXT }}
-          NAMESPACE: market
-          RELEASE_NAME: ${{ github.event.client_payload.release_name }}
-          CHART_NAME: ${{ github.event.client_payload.chart_name }}
-          CHART_VERSION: ${{ github.event.client_payload.chart_version }}
+          NAMESPACE_APP: market
+          HELM_REPO_URL: https://helm.lda-dev.com
+          HELM_REPO_USERNAME: ${{ secrets.HELM_REPO_USERNAME }}
+          HELM_REPO_PASSWORD: ${{ secrets.HELM_REPO_PASSWORD }}
+          NAME_APP: ${{ github.event.client_payload.helm_name }}
         run: |
-          helm upgrade --install "$RELEASE_NAME" "repo-lda-dev/$CHART_NAME" \
-            --namespace "$NAMESPACE" \
-            --create-namespace \
-            --kube-context "$KUBE_CONTEXT" \
-            ${CHART_VERSION:+--version "$CHART_VERSION"} \
-            --wait \
-            --timeout 5m
-
-#      - name: Deploy Helm chart
-#        env:
-#          KUBE_CONTEXT: ${{ secrets.KUBE_CONTEXT }}
-#          NAMESPACE_APP: market
-#          HELM_REPO_URL: https://helm.lda-dev.com
-#          HELM_REPO_USERNAME: ${{ secrets.HELM_REPO_USERNAME }}
-#          HELM_REPO_PASSWORD: ${{ secrets.HELM_REPO_PASSWORD }}
-#          NAME_APP: ${{ github.event.client_payload.helm_name }}
-#        run: |
-#          helm repo add repo-lda-dev "$HELM_REPO_URL" --username "$HELM_REPO_USERNAME" --password "$HELM_REPO_PASSWORD"
-#          helm repo update
-#          helm uninstall "$NAME_APP" --namespace "$NAMESPACE_APP" --kube-context "$KUBE_CONTEXT" || true
-#          helm install "$NAME_APP" "repo-lda-dev/$NAME_APP" --namespace "$NAMESPACE_APP" --kube-context "$KUBE_CONTEXT"
+          helm uninstall "$NAME_APP" --namespace "$NAMESPACE_APP" --kube-context "$KUBE_CONTEXT" || true
+          helm install "$NAME_APP" "repo-lda-dev/$NAME_APP" --namespace "$NAMESPACE_APP" --kube-context "$KUBE_CONTEXT"
