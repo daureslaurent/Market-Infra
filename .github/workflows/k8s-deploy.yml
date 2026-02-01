@@ -17,7 +17,7 @@ jobs:
       - name: Setup kubeconfig
         run: |
           mkdir -p ~/.kube
-          echo "${{ secrets.KUBE_CONFIG }}" > ~/.kube/config
+          echo "${{ secrets.KUBE_CONTEXT }}" > ~/.kube/config
           chmod 600 ~/.kube/config
           kubectl config get-contexts
 
@@ -36,12 +36,11 @@ jobs:
 
       - name: Deploy Helm chart
         env:
-          KUBE_CONTEXT: ${{ secrets.KUBE_CONTEXT }}
           NAMESPACE_APP: market
           HELM_REPO_URL: https://helm.lda-dev.com
           HELM_REPO_USERNAME: ${{ secrets.HELM_REPO_USERNAME }}
           HELM_REPO_PASSWORD: ${{ secrets.HELM_REPO_PASSWORD }}
           NAME_APP: ${{ github.event.client_payload.helm_name }}
         run: |
-          helm uninstall "$NAME_APP" --namespace "$NAMESPACE_APP" --kube-context "$KUBE_CONTEXT" || true
-          helm install "$NAME_APP" "repo-lda-dev/$NAME_APP" --namespace "$NAMESPACE_APP" --kube-context "$KUBE_CONTEXT"
+          helm uninstall "$NAME_APP" --namespace "$NAMESPACE_APP" || true
+          helm install "$NAME_APP" "repo-lda-dev/$NAME_APP" --namespace "$NAMESPACE_APP"
