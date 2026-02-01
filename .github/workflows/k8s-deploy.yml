@@ -43,4 +43,4 @@ jobs:
           NAME_APP: ${{ github.event.client_payload.helm_name }}
         run: |
           helm uninstall "$NAME_APP" --namespace "$NAMESPACE_APP" || true
-          helm install "$NAME_APP" "repo-lda-dev/$NAME_APP" --namespace "$NAMESPACE_APP"
+          helm install "$NAME_APP" "repo-lda-dev/$NAME_APP" --namespace "$NAMESPACE_APP" --create-namespace
