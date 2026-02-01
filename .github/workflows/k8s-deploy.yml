@@ -16,11 +16,11 @@ jobs:
       - name: Deploy Helm chart
         env:
           KUBE_CONTEXT: ${{ secrets.KUBE_CONTEXT }}
-          NAMESPACE_APP: ${{ github.event.helm_namespace }}
+          NAMESPACE_APP: market
           HELM_REPO_URL: https://helm.lda-dev.com
           HELM_REPO_USERNAME: ${{ secrets.HELM_REPO_USERNAME }}
           HELM_REPO_PASSWORD: ${{ secrets.HELM_REPO_PASSWORD }}
-          NAME_APP: ${{ github.event.helm_name }}
+          NAME_APP: ${{ github.event.client_payload.helm_name }}
         run: |
           helm repo add repo-lda-dev "$HELM_REPO_URL" --username "$HELM_REPO_USERNAME" --password "$HELM_REPO_PASSWORD"
           helm repo update
