@@ -1,7 +1,7 @@
 name: Deploy on K8S using Helm
 on:
   repository_dispatch:
-    types: [ deploy ]
+    types: [ helm-deploy ]
 
 jobs:
   deploy:
