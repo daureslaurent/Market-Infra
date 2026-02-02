@@ -40,9 +40,9 @@ It is responsible for deploying the complete application stack using **Docker Co
 
 | Service       | Description                                      | Repository     |
 |---------------|--------------------------------------------------|---------------|
-| BackForFront  | Aggregates microservices for the frontend        | 🔗 *link here* |
+| BackForFront  | Aggregates microservices for the frontend        | 🔗 *https://github.com/daureslaurent/Market-Spring* |
 | Order MS      | Manages orders, payments, and order status       | 🔗 *link here* |
-| Catalog MS    | Manages products, categories, pricing, stock     | 🔗 *link here* |
+| Catalog MS    | Manages products, categories, pricing, stock     | 🔗 *https://github.com/daureslaurent/Market-Catalog-MS* |
 | Customer MS   | Manages customer profiles and notifications      | 🔗 *link here* |
 | Frontend      | UI for browsing, orders, and account management  | 🔗 *https://github.com/daureslaurent/Market-Angular* |
 
