@@ -1,6 +1,7 @@
 # Market – Infrastructure Repository
 
-![Docker](https://img.shields.io/badge/docker-ready-blue?style=flat-square&logo=docker&logoColor=white)
+![Kubernetes](https://img.shields.io/badge/kubernetes-ready-326CE5?style=flat-square&logo=kubernetes&logoColor=white)
+![Helm](https://img.shields.io/badge/helm-charts-0F1689?style=flat-square&logo=helm&logoColor=white)
 ![Architecture](https://img.shields.io/badge/architecture-CQRS%20%7C%20Saga%20%7C%20Hexagonal-success?style=flat-square)
 ![License](https://img.shields.io/github/license/daureslaurent/Market-Infra?style=flat-square)
 ![PostgreSQL](https://img.shields.io/badge/postgresql-database-4169E1?style=flat-square&logo=postgresql&logoColor=white)
@@ -8,20 +9,20 @@
 ![Microservices](https://img.shields.io/badge/microservices-architecture-blueviolet?style=flat-square)
 ![Hexagonal](https://img.shields.io/badge/hexagonal-ports%20%26%20adapters-orange?style=flat-square)
 
-[![CI/CD](https://github.com/daureslaurent/Market-Infra/actions/workflows/light-deploy.yml/badge.svg)](https://github.com/daureslaurent/Market-Infra/actions/workflows/light-deploy.yml)
+[![Deploy on K8S using Helm](https://github.com/daureslaurent/Market-Infra/actions/workflows/k8s-deploy.yml/badge.svg)](https://github.com/daureslaurent/Market-Infra/actions/workflows/k8s-deploy.yml)
 [![Live](https://img.shields.io/badge/live-market.lda--dev.com-blue?style=flat-square)](https://market.lda-dev.com)
 
-
-
-
-This repository contains the **infrastructure layer** for the **Market** project.
-It is responsible for deploying the complete application stack using **Docker Compose**, with a strong focus on:
+This repository contains the **infrastructure layer** for the **Market** project.  
+It is responsible for deploying the complete application stack using **Kubernetes with Helm**, with a strong focus on:
 
 * **CQRS** (Command Query Responsibility Segregation)
 * **Saga Pattern** for distributed transactions
 * **Hexagonal Architecture** (Ports & Adapters)
 * **Microservices architecture**
-* **Low-cost / VPS friendly deployment**, while remaining **cloud-ready (AWS)**
+* **Helm-based deployments** for reproducibility and environment consistency
+* **VPS-friendly Kubernetes setups** (e.g. k3s / MicroK8s), while remaining **cloud-ready (AWS / EKS)**
+
+
 
 ---
 
