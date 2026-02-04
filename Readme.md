@@ -39,13 +39,14 @@ It is responsible for deploying the complete application stack using **Kubernete
 
 ## 📦 Services Overview
 
-| Service       | Description                                      | Repository     |
-|---------------|--------------------------------------------------|---------------|
-| BackForFront  | Aggregates microservices for the frontend        | 🔗 *https://github.com/daureslaurent/Market-Spring* |
-| Order MS      | Manages orders, payments, and order status       | 🔗 *link here* |
-| Catalog MS    | Manages products, categories, pricing, stock     | 🔗 *https://github.com/daureslaurent/Market-Catalog-MS* |
-| Customer MS   | Manages customer profiles and notifications      | 🔗 *link here* |
-| Frontend      | UI for browsing, orders, and account management  | 🔗 *https://github.com/daureslaurent/Market-Angular* |
+| Service       | Description                                          | Repository     |
+|---------------|------------------------------------------------------|---------------|
+| BackForFront  | Aggregates microservices for the frontend            | 🔗 *https://github.com/daureslaurent/Market-Spring* |
+| Order MS      | Manages orders, payments, and order status           | 🔗 *link here* |
+| Catalog MS    | Manages products, categories, pricing, stock         | 🔗 *https://github.com/daureslaurent/Market-Catalog-MS* |
+| Customer MS   | Manages customer profiles and notifications          | 🔗 *link here* |
+| Frontend      | UI for browsing, orders, and account management      | 🔗 *https://github.com/daureslaurent/Market-Angular* |
+| StreamBox Lib | Outbox / Inbox pattern helper for event reliability  | 🔗 *https://github.com/daureslaurent/Spring-StreamBox* |
 
 
 ## 🖼️ Architecture Diagram
